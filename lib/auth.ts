@@ -34,7 +34,7 @@ export function createJWT(user: BaseUser): Promise<string> {
 
 // export async function getUserFromCookie(cookies: Cookie): Promise<User | null> {
 //   try {
-//     const jwt = cookies.get(getAuthCookie());
+//     const jwt = cookies.get("Authorization");
 //     if (!jwt) {
 //       return null;
 //     }

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../lib/db";
 import { serialize } from "cookie";
-import { comparePasswords, createJWT, getAuthCookie } from "../../lib/auth";
+import { comparePasswords, createJWT } from "../../lib/auth";
 
 export default async function signin(
   req: NextApiRequest,
@@ -31,7 +31,7 @@ export default async function signin(
 
         res.setHeader(
           "Set-Cookie",
-          serialize(getAuthCookie(), jwt, {
+          serialize("Authorization", jwt, {
             httpOnly: true,
             path: "/",
             maxAge: 60 * 60 * 24 * 7,
