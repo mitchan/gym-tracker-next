@@ -1,27 +1,25 @@
-import { User } from "@prisma/client";
-import { compare, hash } from "bcrypt";
-import { jwtVerify, SignJWT } from "jose";
-import { db } from "./db";
+import { User } from '@prisma/client';
+import { compare, hash } from 'bcrypt';
+import { jwtVerify, SignJWT } from 'jose';
+import { db } from './db';
 
-type BaseUser = Pick<User, "id" | "email">;
+type BaseUser = Pick<User, 'id' | 'email'>;
 
 export const hashPassword = (password: string) => hash(password, 10);
 
-export const comparePasswords = (
-  plainTextPassword: string,
-  hashedPassword: string
-) => compare(plainTextPassword, hashedPassword);
+export const comparePasswords = (plainTextPassword: string, hashedPassword: string) =>
+    compare(plainTextPassword, hashedPassword);
 
 export function createJWT(user: BaseUser): Promise<string> {
-  const iat = Math.floor(Date.now() / 1000);
-  const exp = iat + 60 * 60 * 24 * 7;
+    const iat = Math.floor(Date.now() / 1000);
+    const exp = iat + 60 * 60 * 24 * 7;
 
-  return new SignJWT({ payload: { id: user.id, email: user.email } })
-    .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-    .setExpirationTime(exp)
-    .setIssuedAt(iat)
-    .setNotBefore(iat)
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    return new SignJWT({ payload: { id: user.id, email: user.email } })
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .setExpirationTime(exp)
+        .setIssuedAt(iat)
+        .setNotBefore(iat)
+        .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 }
 
 // async function validateJWT(jwt: string): Promise<unknown> {
