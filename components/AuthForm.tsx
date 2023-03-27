@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-import { signin } from "../lib/api";
+import { register, signin } from "../lib/api";
 import { Button } from "./core/Button";
 import { InputText } from "./input/InputText";
 
@@ -28,9 +28,14 @@ export function AuthForm(props: AuthFormProps) {
     try {
       if (mode === "signin") {
         await signin({ email: formState.email, password: formState.password });
+      } else {
+        await register({
+          email: formState.email,
+          password: formState.password,
+        });
       }
 
-      router.push("/home");
+      router.push(mode === "signin" ? "/home" : "/login");
       setFormState(initial);
     } catch (e) {
       // TODO handle error
@@ -60,7 +65,11 @@ export function AuthForm(props: AuthFormProps) {
         }}
       />
 
-      <Button label="Login" type="submit" disabled={submitting} />
+      <Button
+        label={mode === "signin" ? "Login" : "Signin"}
+        type="submit"
+        disabled={submitting}
+      />
     </form>
   );
 }
