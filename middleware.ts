@@ -20,11 +20,21 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(req.nextUrl);
   }
 
+  if (pathname.startsWith("/login")) {
+    // check if already logged in
+    if (await isValidJwt(req)) {
+      req.nextUrl.pathname = "/";
+      return NextResponse.redirect(req.nextUrl);
+    } else {
+      return NextResponse.next();
+    }
+  }
+
   if (
+    pathname === "/" ||
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/static") ||
-    pathname.startsWith("/login") ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();
@@ -44,4 +54,19 @@ export default async function middleware(req: NextRequest) {
     req.nextUrl.pathname = "/login";
     return NextResponse.redirect(req.nextUrl);
   }
+}
+
+async function isValidJwt(req: NextRequest): Promise<boolean> {
+  const jwt = req.cookies.get("Authorization");
+  if (!jwt) {
+    return false;
+  }
+
+  try {
+    await verifyJWT(jwt.value);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
 }
