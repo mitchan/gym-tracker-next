@@ -35,7 +35,7 @@ export function AuthForm(props: AuthFormProps) {
                 });
             }
 
-            router.push(mode === 'signin' ? '/home' : '/login');
+            router.push(mode === 'signin' ? '/' : '/login');
             setFormState(initial);
         } catch (e) {
             // TODO handle error
