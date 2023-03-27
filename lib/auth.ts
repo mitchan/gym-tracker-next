@@ -59,11 +59,3 @@ export function createJWT(user: BaseUser): Promise<string> {
 //     return null;
 //   }
 // }
-
-export const getAuthCookie = () => {
-  if (process.env.AUTH_COOKIE) {
-    return process.env.AUTH_COOKIE;
-  }
-
-  throw new Error(`Env variable 'process.env.AUTH_COOKIE' not set`);
-};
