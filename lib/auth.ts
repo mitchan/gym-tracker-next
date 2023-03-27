@@ -2,6 +2,8 @@ import { User } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 import { jwtVerify, SignJWT } from 'jose';
 import { db } from './db';
+import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
+import { ReadonlyRequestCookies } from 'next/dist/server/app-render';
 
 type BaseUser = Pick<User, 'id' | 'email'>;
 
@@ -22,38 +24,34 @@ export function createJWT(user: BaseUser): Promise<string> {
         .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 }
 
-// async function validateJWT(jwt: string): Promise<unknown> {
-//   const { payload } = await jwtVerify(
-//     jwt,
-//     new TextEncoder().encode(process.env.JWT_SECRET)
-//   );
-//   return payload.payload;
-// }
+export async function validateJWT(jwt?: string): Promise<User> {
+    if (!jwt) {
+        throw new Error('Jwt is missing');
+    }
 
-// export async function getUserFromCookie(cookies: Cookie): Promise<User | null> {
-//   try {
-//     const jwt = cookies.get("Authorization");
-//     if (!jwt) {
-//       return null;
-//     }
+    const { payload } = await jwtVerify(jwt, new TextEncoder().encode(process.env.JWT_SECRET));
+    return payload.payload as User;
+}
 
-//     const resp = await validateJWT(jwt.value);
+export async function getUserFromCookie(cookies: RequestCookies | ReadonlyRequestCookies): Promise<User | null> {
+    try {
+        const jwt = cookies.get('Authorization');
+        if (!jwt) {
+            return null;
+        }
 
-//     if (
-//       resp &&
-//       typeof resp === "object" &&
-//       "id" in resp &&
-//       typeof resp.id === "string"
-//     ) {
-//       return db.user.findUnique({
-//         where: {
-//           id: resp.id,
-//         },
-//       });
-//     }
+        const resp = await validateJWT(jwt.value);
 
-//     return null;
-//   } catch {
-//     return null;
-//   }
-// }
+        if (resp && typeof resp === 'object' && 'id' in resp && typeof resp.id === 'string') {
+            return db.user.findUnique({
+                where: {
+                    id: resp.id,
+                },
+            });
+        }
+
+        return null;
+    } catch {
+        return null;
+    }
+}

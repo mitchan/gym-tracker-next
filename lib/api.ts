@@ -1,3 +1,5 @@
+import { CreateExercise } from './types';
+
 export const fetcher = async ({
     url,
     method,
@@ -40,4 +42,8 @@ export const register = (user: User) => {
 
 export const signin = (user: User) => {
     return fetcher({ url: '/api/signin', method: 'post', body: user });
+};
+
+export const create_exercise = (exercise: CreateExercise) => {
+    return fetcher({ url: '/api/exercise', method: 'post', body: exercise });
 };
