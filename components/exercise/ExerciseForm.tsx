@@ -1,19 +1,25 @@
 'use client';
 
 import React from 'react';
-import { InputText } from './input/InputText';
-import { Button } from './core/Button';
+import { InputText } from '../input/InputText';
+import { Button } from '../core/Button';
 import { useRouter } from 'next/navigation';
-import { CreateExercise } from '../lib/types';
-import { create_exercise } from '../lib/api';
+import { CreateExercise, UpdateExercise } from '../../lib/types';
+import { create_exercise, update_exercise } from '../../lib/api';
 
-export function ExerciseForm() {
+type ExerciseFormProps = {
+    exercise?: UpdateExercise;
+};
+
+export function ExerciseForm(props: ExerciseFormProps) {
+    const { exercise } = props;
+
     const [formState, setFormState] = React.useState<CreateExercise>({
-        name: '',
-        serie: '',
-        recovery: '',
-        weight: 0,
-        notes: '',
+        name: exercise?.name ?? '',
+        serie: exercise?.serie ?? '',
+        recovery: exercise?.recovery ?? '',
+        weight: exercise?.weight ?? 0,
+        notes: exercise?.notes ?? '',
     });
     const [loading, setLoading] = React.useState(false);
 
@@ -24,7 +30,13 @@ export function ExerciseForm() {
         setLoading(true);
 
         try {
-            await create_exercise(formState);
+            if (exercise) {
+                // EDIT
+                await update_exercise({ ...formState, id: exercise.id });
+            } else {
+                // CREATE
+                await create_exercise(formState);
+            }
             router.push('/exercises');
         } catch (e) {
             // TODO handle error
@@ -98,7 +110,7 @@ export function ExerciseForm() {
                     }}
                 />
 
-                <Button label="Crea" type="submit" disabled={loading} />
+                <Button label={props.exercise ? 'Modifica' : 'Crea'} type="submit" disabled={loading} />
             </form>
         </>
     );

@@ -9,7 +9,7 @@ export default function ExerciseCard(props: ExerciseCardProps) {
     const { exercise } = props;
 
     return (
-        <Link href={`/exercices/${exercise.id}`}>
+        <Link href={`/exercises/${exercise.id}`}>
             <div className="border border-solid border-yellow-700 bg-yellow-700 p-2 rounded shadow-lg mb-2">
                 <div className="flex justify-between items-end mb-5">
                     <h2 className="text-xl truncate w-3/4">{exercise.name}</h2>
