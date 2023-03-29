@@ -10,6 +10,7 @@ export default async function Exercises() {
             <Link href="/exercises/create">Crea nuova esercizio</Link>
 
             <Suspense fallback={<div>Loading</div>}>
+                {/* @ts-expect-error Async Server Component */}
                 <ExerciseList />
             </Suspense>
         </>
