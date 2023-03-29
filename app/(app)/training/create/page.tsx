@@ -1,5 +1,6 @@
 import React from 'react';
+import { TrainingForm } from '../../../../components/training/TrainingForm';
 
 export default function CreateTraining() {
-    return <div>Create training</div>;
+    return <TrainingForm />;
 }

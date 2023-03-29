@@ -1,4 +1,4 @@
-import { CreateExercise, UpdateExercise } from './types';
+import { CreateExercise, CreateTraining, UpdateExercise, UpdateTraining } from './types';
 
 export const fetcher = async ({
     url,
@@ -44,10 +44,18 @@ export const signin = (user: User) => {
     return fetcher({ url: '/api/signin', method: 'POST', body: user });
 };
 
-export const create_exercise = (exercise: CreateExercise) => {
-    return fetcher({ url: '/api/exercise', method: 'POST', body: exercise });
+export const create_exercise = (body: CreateExercise) => {
+    return fetcher({ url: '/api/exercise', method: 'POST', body });
 };
 
-export const update_exercise = (exercise: UpdateExercise) => {
-    return fetcher({ url: '/api/exercise', method: 'PATCH', body: exercise });
+export const update_exercise = (body: UpdateExercise) => {
+    return fetcher({ url: '/api/exercise', method: 'PATCH', body });
+};
+
+export const create_training = (body: CreateTraining) => {
+    return fetcher({ url: '/api/training', method: 'POST', body });
+};
+
+export const update_training = (body: UpdateTraining) => {
+    return fetcher({ url: '/api/training', method: 'PATCH', body });
 };

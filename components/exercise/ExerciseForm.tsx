@@ -46,7 +46,7 @@ export function ExerciseForm(props: ExerciseFormProps) {
 
     return (
         <>
-            <h1 className="text-4xl">Nuovo esercizio</h1>
+            <h1 className="text-4xl">{exercise ? 'Modifica esercizio' : 'Nuovo esercizio'}</h1>
 
             <form onSubmit={handleSubmit}>
                 <InputText
