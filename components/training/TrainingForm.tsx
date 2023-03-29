@@ -8,13 +8,13 @@ import { create_training, update_training } from '../../lib/api';
 import { useRouter } from 'next/navigation';
 
 type TrainingFormProps = {
-    training: UpdateTraining;
+    training?: UpdateTraining;
 };
 
 export function TrainingForm(props: TrainingFormProps) {
     const { training } = props;
 
-    const [title, setTitle] = React.useState(training?.title);
+    const [title, setTitle] = React.useState(training?.title ?? '');
     const [loading, setLoading] = React.useState(false);
 
     const router = useRouter();
