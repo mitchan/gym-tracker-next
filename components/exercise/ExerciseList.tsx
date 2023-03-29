@@ -7,12 +7,12 @@ async function getData() {
     const user = await getUserFromCookie(cookies());
 
     if (!user) {
-        [];
+        return { exercises: [] };
     }
 
     const exercises = await db.exercise.findMany({
         where: {
-            userId: user?.id,
+            userId: user.id,
         },
         orderBy: {
             name: 'asc',
