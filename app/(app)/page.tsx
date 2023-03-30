@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { TrainingList } from '../../components/training/TrainingList';
 import { Suspense } from 'react';
+import { Spinner } from '../../components/core/Spinner';
 
 export default function Home() {
     return (
@@ -12,7 +13,7 @@ export default function Home() {
                 <Link href={'/exercises'}>Esercizi</Link>
             </div>
 
-            <Suspense fallback={<div>Loading</div>}>
+            <Suspense fallback={<Spinner />}>
                 {/* @ts-expect-error Async Server Component */}
                 <TrainingList />
             </Suspense>

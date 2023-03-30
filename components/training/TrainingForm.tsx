@@ -6,6 +6,7 @@ import { Button } from '../core/Button';
 import { UpdateTraining } from '../../lib/types';
 import { create_training, update_training } from '../../lib/api';
 import { useRouter } from 'next/navigation';
+import { Loading } from '../core/Loading';
 
 type TrainingFormProps = {
     training?: UpdateTraining;
@@ -36,11 +37,14 @@ export function TrainingForm(props: TrainingFormProps) {
         } catch (error) {
             // TODO handle error
             console.error(error);
+            setLoading(false);
         }
     }
 
     return (
         <>
+            {loading && <Loading />}
+
             <h1 className="text-4xl">{training ? 'Modifica esercizio' : 'Nuovo esercizio'}</h1>
 
             <form onSubmit={handleSubmit}>

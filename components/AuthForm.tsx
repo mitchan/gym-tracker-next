@@ -5,6 +5,7 @@ import React from 'react';
 import { register, signin } from '../lib/api';
 import { Button } from './core/Button';
 import { InputText } from './input/InputText';
+import { Loading } from './core/Loading';
 
 type AuthFormProps = {
     mode?: 'signin' | 'register';
@@ -45,27 +46,31 @@ export function AuthForm(props: AuthFormProps) {
     }
 
     return (
-        <form className="w-full px-5" onSubmit={handleSubmit}>
-            <InputText
-                name="email"
-                label="Email"
-                value={formState.email}
-                onChange={(value) => {
-                    setFormState((oldValue) => ({ ...oldValue, email: value }));
-                }}
-            />
+        <>
+            {submitting && <Loading />}
 
-            <InputText
-                type="password"
-                name="password"
-                label="Password"
-                value={formState.password}
-                onChange={(value) => {
-                    setFormState((oldValue) => ({ ...oldValue, password: value }));
-                }}
-            />
+            <form className="w-full px-5" onSubmit={handleSubmit}>
+                <InputText
+                    name="email"
+                    label="Email"
+                    value={formState.email}
+                    onChange={(value) => {
+                        setFormState((oldValue) => ({ ...oldValue, email: value }));
+                    }}
+                />
 
-            <Button label={mode === 'signin' ? 'Login' : 'Signin'} type="submit" disabled={submitting} />
-        </form>
+                <InputText
+                    type="password"
+                    name="password"
+                    label="Password"
+                    value={formState.password}
+                    onChange={(value) => {
+                        setFormState((oldValue) => ({ ...oldValue, password: value }));
+                    }}
+                />
+
+                <Button label={mode === 'signin' ? 'Login' : 'Signin'} type="submit" disabled={submitting} />
+            </form>
+        </>
     );
 }

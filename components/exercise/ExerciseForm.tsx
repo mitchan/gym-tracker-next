@@ -6,6 +6,7 @@ import { Button } from '../core/Button';
 import { useRouter } from 'next/navigation';
 import { CreateExercise, UpdateExercise } from '../../lib/types';
 import { create_exercise, update_exercise } from '../../lib/api';
+import { Loading } from '../core/Loading';
 
 type ExerciseFormProps = {
     exercise?: UpdateExercise;
@@ -46,6 +47,8 @@ export function ExerciseForm(props: ExerciseFormProps) {
 
     return (
         <>
+            {loading && <Loading />}
+
             <h1 className="text-4xl">{exercise ? 'Modifica esercizio' : 'Nuovo esercizio'}</h1>
 
             <form onSubmit={handleSubmit}>
