@@ -41,12 +41,12 @@ export function TrainingForm(props: TrainingFormProps) {
 
     return (
         <>
-            <h1 className="text-4xl">Nuovo esercizio</h1>
+            <h1 className="text-4xl">{training ? 'Modifica esercizio' : 'Nuovo esercizio'}</h1>
 
             <form onSubmit={handleSubmit}>
                 <InputText name="title" label="Descrizione" value={title} onChange={setTitle} />
 
-                <Button label={'Crea'} type="submit" disabled={loading} />
+                <Button label={training ? 'Modifica' : 'Crea'} type="submit" disabled={loading} />
             </form>
         </>
     );
