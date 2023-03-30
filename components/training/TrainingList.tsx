@@ -9,7 +9,7 @@ async function getData(): Promise<Training[]> {
     const user = await getUserFromCookie(cookies());
 
     if (!user) {
-        [];
+        return [];
     }
 
     return db.training.findMany({
