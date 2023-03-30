@@ -1,12 +1,37 @@
 import { ReactNode } from 'react';
 import '../globals.css';
+import { cookies } from 'next/headers';
+import { getUserFromCookie } from '../../lib/auth';
+import Link from 'next/link';
 
-export default function AuthRootLayout({ children }: { children: ReactNode }) {
+async function getUser() {
+    return getUserFromCookie(cookies());
+}
+
+const baseClasses = 'w-full h-full bg-purple-900 text-white';
+
+export default async function AuthRootLayout({ children }: { children: ReactNode }) {
+    const user = await getUser();
+
     return (
         <html lang="en">
             <head />
             <body className="h-screen w-screen">
-                <div className="w-full h-full bg-purple-900 text-white p-5">{children}</div>
+                {user ? (
+                    <div className={`${baseClasses} p-5`}>{children}</div>
+                ) : (
+                    <div className={`${baseClasses} flex flex-col items-center justify-center gap-5`}>
+                        <p>Non sei autenticato.</p>
+
+                        <p>
+                            Accedi alla pagina di{' '}
+                            <Link href="/login" className="underline">
+                                Login
+                            </Link>{' '}
+                            per autenticarti.
+                        </p>
+                    </div>
+                )}
             </body>
         </html>
     );
