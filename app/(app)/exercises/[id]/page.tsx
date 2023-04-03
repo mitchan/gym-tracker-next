@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
+
+import { ExerciseForm } from '../../../../components/exercise/ExerciseForm';
 import { getUserFromCookie } from '../../../../lib/auth';
 import { db } from '../../../../lib/db';
-import { ExerciseForm } from '../../../../components/exercise/ExerciseForm';
 
 type ExerciseProps = {
     params: { id: string };

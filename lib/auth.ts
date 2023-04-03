@@ -1,9 +1,10 @@
 import { User } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 import { jwtVerify, SignJWT } from 'jose';
-import { db } from './db';
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { ReadonlyRequestCookies } from 'next/dist/server/app-render';
+
+import { db } from './db';
 
 type BaseUser = Pick<User, 'id' | 'email'>;
 

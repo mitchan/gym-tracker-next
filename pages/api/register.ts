@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../../lib/db';
+
 import { hashPassword } from '../../lib/auth';
+import { db } from '../../lib/db';
 
 export default async function register(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {

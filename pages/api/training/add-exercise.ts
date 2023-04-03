@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { validateJWT } from '../../../lib/auth';
-import { AddExercise } from '../../../lib/types';
 import { db } from '../../../lib/db';
+import { AddExercise } from '../../../lib/types';
 
 export default async function createExercise(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
@@ -21,7 +22,7 @@ async function handleAdd(req: NextApiRequest, res: NextApiResponse) {
 
         const body = req.body as AddExercise;
 
-        // check if traning
+        // check if traning exists
         const training = await db.training.findFirst({
             where: {
                 id: body.trainingId,
@@ -41,6 +42,19 @@ async function handleAdd(req: NextApiRequest, res: NextApiResponse) {
         const found = training.exercises.find((relation) => relation.exerciseId === body.exerciseId);
         if (found) {
             res.status(400).json({ message: `exercise ${body.exerciseId} already present` });
+            return;
+        }
+
+        // check if exercise exists
+        const exercise = await db.exercise.findFirst({
+            where: {
+                id: body.trainingId,
+                userId: user.id,
+            },
+        });
+
+        if (!exercise) {
+            res.status(400).json({ message: `exercise with id ${body.exerciseId} not found` });
             return;
         }
 

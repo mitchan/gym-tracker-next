@@ -1,11 +1,12 @@
 'use client';
 
 import { Exercise } from '@prisma/client';
-import ExerciseCard from '../exercise/ExerciseCard';
-import React from 'react';
-import { Loading } from '../core/Loading';
-import { add_exercise } from '../../lib/api';
 import { useRouter } from 'next/navigation';
+import React from 'react';
+
+import { add_exercise } from '../../lib/api';
+import { Loading } from '../core/Loading';
+import ExerciseCard from '../exercise/ExerciseCard';
 
 type AddExerciseProps = {
     trainingId: string;

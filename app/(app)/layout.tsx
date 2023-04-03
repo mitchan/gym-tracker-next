@@ -1,8 +1,10 @@
-import { ReactNode } from 'react';
 import '../globals.css';
+
 import { cookies } from 'next/headers';
-import { getUserFromCookie } from '../../lib/auth';
 import Link from 'next/link';
+import { ReactNode } from 'react';
+
+import { getUserFromCookie } from '../../lib/auth';
 
 async function getUser() {
     return getUserFromCookie(cookies());

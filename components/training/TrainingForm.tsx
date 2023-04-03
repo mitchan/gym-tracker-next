@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
-import { InputText } from '../input/InputText';
-import { Button } from '../core/Button';
-import { UpdateTraining } from '../../lib/types';
-import { create_training, update_training } from '../../lib/api';
 import { useRouter } from 'next/navigation';
+import React from 'react';
+
+import { create_training, update_training } from '../../lib/api';
+import { UpdateTraining } from '../../lib/types';
+import { Button } from '../core/Button';
 import { Loading } from '../core/Loading';
+import { InputText } from '../input/InputText';
 
 type TrainingFormProps = {
     training?: UpdateTraining;

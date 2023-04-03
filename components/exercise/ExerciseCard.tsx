@@ -1,4 +1,5 @@
 import type { Exercise } from '@prisma/client';
+
 import { Card } from '../core/Card';
 
 type ExerciseCardProps = {

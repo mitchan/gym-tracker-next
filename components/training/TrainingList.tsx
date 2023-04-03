@@ -1,8 +1,9 @@
 import { Training } from '@prisma/client';
-import { getUserFromCookie } from '../../lib/auth';
 import { cookies } from 'next/headers';
-import { db } from '../../lib/db';
 import Link from 'next/link';
+
+import { getUserFromCookie } from '../../lib/auth';
+import { db } from '../../lib/db';
 import { Card } from '../core/Card';
 
 async function getData(): Promise<Training[]> {

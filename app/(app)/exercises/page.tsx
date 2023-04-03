@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { ExerciseList } from '../../../components/exercise/ExerciseList';
 import { Suspense } from 'react';
+
 import { Spinner } from '../../../components/core/Spinner';
+import { ExerciseList } from '../../../components/exercise/ExerciseList';
 
 export default async function Exercises() {
     return (

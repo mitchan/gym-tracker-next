@@ -2,10 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import React from 'react';
+
 import { register, signin } from '../lib/api';
 import { Button } from './core/Button';
-import { InputText } from './input/InputText';
 import { Loading } from './core/Loading';
+import { InputText } from './input/InputText';
 
 type AuthFormProps = {
     mode?: 'signin' | 'register';

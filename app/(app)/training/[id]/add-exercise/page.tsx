@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
 
+import { AddExercise } from '../../../../../components/training/AddExercise';
 import { getUserFromCookie } from '../../../../../lib/auth';
 import { db } from '../../../../../lib/db';
-import { AddExercise } from '../../../../../components/training/AddExercise';
 
 type ExerciseProps = {
     params: { id: string };

@@ -1,7 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../../lib/db';
 import { serialize } from 'cookie';
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import { comparePasswords, createJWT } from '../../lib/auth';
+import { db } from '../../lib/db';
 
 export default async function signin(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {

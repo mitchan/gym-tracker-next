@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { CreateExercise, CreateTraining, UpdateExercise, UpdateTraining } from '../../lib/types';
+
 import { validateJWT } from '../../lib/auth';
 import { db } from '../../lib/db';
+import { CreateExercise, CreateTraining, UpdateExercise, UpdateTraining } from '../../lib/types';
 
 export default async function createExercise(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {

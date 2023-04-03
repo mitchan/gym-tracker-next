@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { TrainingList } from '../../components/training/TrainingList';
 import { Suspense } from 'react';
+
 import { Spinner } from '../../components/core/Spinner';
+import { TrainingList } from '../../components/training/TrainingList';
 
 export default function Home() {
     return (

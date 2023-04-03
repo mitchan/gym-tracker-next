@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
+import Link from 'next/link';
+
 import { getUserFromCookie } from '../../lib/auth';
 import { db } from '../../lib/db';
 import ExerciseCard from './ExerciseCard';
-import Link from 'next/link';
 
 async function getData() {
     const user = await getUserFromCookie(cookies());
