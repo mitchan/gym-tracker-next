@@ -12,6 +12,7 @@
         "fmt:check": "prettier --check ."
     },
     "dependencies": {
+        "@heroicons/react": "^2.0.17",
         "@prisma/client": "^4.11.0",
         "@types/node": "18.15.5",
         "@types/react": "18.0.28",

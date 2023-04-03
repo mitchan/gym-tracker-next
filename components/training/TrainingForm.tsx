@@ -48,7 +48,7 @@ export function TrainingForm(props: TrainingFormProps) {
 
             <h1 className="text-4xl">{training ? 'Modifica esercizio' : 'Nuovo esercizio'}</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="mb-2">
                 <InputText name="title" label="Descrizione" value={title} onChange={setTitle} />
 
                 <Button label={training ? 'Modifica' : 'Crea'} type="submit" disabled={loading} />

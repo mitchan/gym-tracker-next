@@ -1,14 +1,16 @@
 import type { Exercise } from '@prisma/client';
 
 import { Card } from '../core/Card';
+import { ExerciseCount } from './ExerciseCount';
 
 type ExerciseCardProps = {
     exercise: Exercise;
+    showCount?: boolean;
     onClick?: () => void;
 };
 
 export default function ExerciseCard(props: ExerciseCardProps) {
-    const { exercise } = props;
+    const { exercise, showCount } = props;
 
     return (
         <Card onClick={props.onClick}>
@@ -23,6 +25,8 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 {exercise.weight > 0 && <li>Peso: {exercise.weight} Kg</li>}
                 {exercise.notes && <li>{exercise.notes}</li>}
             </ul>
+
+            {showCount && <ExerciseCount exercise={exercise} />}
         </Card>
     );
 }
