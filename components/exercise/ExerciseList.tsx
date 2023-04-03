@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { getUserFromCookie } from '../../lib/auth';
 import { db } from '../../lib/db';
 import ExerciseCard from './ExerciseCard';
+import Link from 'next/link';
 
 async function getData() {
     const user = await getUserFromCookie(cookies());
@@ -28,7 +29,9 @@ export async function ExerciseList() {
     return (
         <div className="my-2">
             {exercises.map((exercise) => (
-                <ExerciseCard key={exercise.id} exercise={exercise} />
+                <Link key={exercise.id} href={`/exercises/${exercise.id}`}>
+                    <ExerciseCard exercise={exercise} />
+                </Link>
             ))}
         </div>
     );

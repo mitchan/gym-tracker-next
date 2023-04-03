@@ -3,6 +3,7 @@ import { getUserFromCookie } from '../../../../lib/auth';
 import { db } from '../../../../lib/db';
 import { ExerciseForm } from '../../../../components/exercise/ExerciseForm';
 import { TrainingForm } from '../../../../components/training/TrainingForm';
+import Link from 'next/link';
 
 type ExerciseProps = {
     params: { id: string };
@@ -35,11 +36,15 @@ export default async function Training(props: ExerciseProps) {
     }
 
     return (
-        <TrainingForm
-            training={{
-                id: training.id,
-                title: training.title,
-            }}
-        />
+        <>
+            <TrainingForm
+                training={{
+                    id: training.id,
+                    title: training.title,
+                }}
+            />
+
+            <Link href={`/training/${props.params.id}/add-exercise`}>Aggiungi esercizio</Link>
+        </>
     );
 }
