@@ -1,23 +1,22 @@
 'use client';
 
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid';
-import { Exercise } from '@prisma/client';
 import React from 'react';
 
 type ExerciseCountProps = {
-    exercise: Exercise;
+    exerciseId: string;
 };
 
 export function ExerciseCount(props: ExerciseCountProps) {
-    const { exercise } = props;
+    const { exerciseId } = props;
 
-    const valueFromLS = localStorage.getItem(exercise.id);
+    const valueFromLS = localStorage.getItem(exerciseId);
 
     const [count, setCount] = React.useState(valueFromLS ? Number(valueFromLS) : 0);
 
     React.useEffect(() => {
-        localStorage.setItem(exercise.id, `${count}`);
-    }, [count, exercise.id]);
+        localStorage.setItem(exerciseId, `${count}`);
+    }, [count, exerciseId]);
 
     return (
         <div className="mt-2 flex justify-around items-center">

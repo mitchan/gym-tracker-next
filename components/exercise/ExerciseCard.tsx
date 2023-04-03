@@ -26,7 +26,7 @@ export default function ExerciseCard(props: ExerciseCardProps) {
                 {exercise.notes && <li>{exercise.notes}</li>}
             </ul>
 
-            {showCount && <ExerciseCount exercise={exercise} />}
+            {showCount && <ExerciseCount exerciseId={exercise.id} />}
         </Card>
     );
 }
