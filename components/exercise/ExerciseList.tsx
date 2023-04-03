@@ -31,7 +31,16 @@ export async function ExerciseList() {
         <div className="my-2">
             {exercises.map((exercise) => (
                 <Link key={exercise.id} href={`/exercises/${exercise.id}`}>
-                    <ExerciseCard exercise={exercise} />
+                    <ExerciseCard
+                        exercise={{
+                            id: exercise.id,
+                            name: exercise.name,
+                            notes: exercise.notes,
+                            recovery: exercise.recovery,
+                            serie: exercise.serie,
+                            weight: exercise.weight,
+                        }}
+                    />
                 </Link>
             ))}
         </div>

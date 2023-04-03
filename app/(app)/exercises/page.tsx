@@ -18,3 +18,7 @@ export default async function Exercises() {
         </>
     );
 }
+
+export const metadata = {
+    title: 'GymTracker - Esercizi',
+};

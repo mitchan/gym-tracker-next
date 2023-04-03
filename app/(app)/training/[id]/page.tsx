@@ -56,7 +56,18 @@ export default async function Training(props: ExerciseProps) {
             <h1 className="text-4xl mb-5">{training.title}</h1>
 
             {training.exercises.map(({ exercice }) => (
-                <ExerciseCard key={exercice.id} exercise={exercice} showCount />
+                <ExerciseCard
+                    key={exercice.id}
+                    exercise={{
+                        id: exercice.id,
+                        name: exercice.name,
+                        notes: exercice.notes,
+                        recovery: exercice.recovery,
+                        serie: exercice.serie,
+                        weight: exercice.weight,
+                    }}
+                    showCount
+                />
             ))}
 
             <div className="flex items-center justify-center">

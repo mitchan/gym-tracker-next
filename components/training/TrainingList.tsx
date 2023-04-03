@@ -27,12 +27,14 @@ export async function TrainingList() {
     const trainings = await getData();
 
     return (
-        <>
+        <div className="my-5">
             {trainings.map((training) => (
                 <Link key={training.id} href={`/training/${training.id}`}>
                     <Card>{training.title}</Card>
                 </Link>
             ))}
-        </>
+
+            {trainings.length === 0 && <p className="text-center">Nessuna scheda trovata: creane una nuova!</p>}
+        </div>
     );
 }

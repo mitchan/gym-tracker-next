@@ -10,7 +10,7 @@ import ExerciseCard from '../exercise/ExerciseCard';
 
 type AddExerciseProps = {
     trainingId: string;
-    exercises: Exercise[];
+    exercises: Pick<Exercise, 'id' | 'name' | 'notes' | 'recovery' | 'serie' | 'weight'>[];
 };
 
 export function AddExercise(props: AddExerciseProps) {
@@ -19,7 +19,7 @@ export function AddExercise(props: AddExerciseProps) {
     const [loading, setLoading] = React.useState(false);
     const router = useRouter();
 
-    async function handleAddExercise(exercise: Exercise) {
+    async function handleAddExercise(exercise: { id: string }) {
         setLoading(true);
 
         try {
@@ -40,7 +40,14 @@ export function AddExercise(props: AddExerciseProps) {
                 {exercises.map((exercise) => (
                     <ExerciseCard
                         key={exercise.id}
-                        exercise={exercise}
+                        exercise={{
+                            id: exercise.id,
+                            name: exercise.name,
+                            notes: exercise.notes,
+                            recovery: exercise.recovery,
+                            serie: exercise.serie,
+                            weight: exercise.weight,
+                        }}
                         onClick={() => {
                             handleAddExercise(exercise);
                         }}

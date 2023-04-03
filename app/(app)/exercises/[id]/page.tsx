@@ -8,6 +8,14 @@ type ExerciseProps = {
     params: { id: string };
 };
 
+export async function generateMetadata({ params }: { params: any }) {
+    const { exercise } = await getData(params.id);
+
+    return {
+        title: exercise?.name ?? '',
+    };
+}
+
 async function getData(id: string) {
     const user = await getUserFromCookie(cookies());
 

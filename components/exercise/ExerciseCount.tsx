@@ -10,9 +10,10 @@ type ExerciseCountProps = {
 export function ExerciseCount(props: ExerciseCountProps) {
     const { exerciseId } = props;
 
-    const valueFromLS = localStorage.getItem(exerciseId);
-
-    const [count, setCount] = React.useState(valueFromLS ? Number(valueFromLS) : 0);
+    const [count, setCount] = React.useState(() => {
+        const valueFromLS = localStorage.getItem(exerciseId);
+        return valueFromLS ? Number(valueFromLS) : 0;
+    });
 
     React.useEffect(() => {
         localStorage.setItem(exerciseId, `${count}`);

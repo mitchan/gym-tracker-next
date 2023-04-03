@@ -4,7 +4,7 @@ import { Card } from '../core/Card';
 import { ExerciseCount } from './ExerciseCount';
 
 type ExerciseCardProps = {
-    exercise: Exercise;
+    exercise: Pick<Exercise, 'id' | 'name' | 'recovery' | 'serie' | 'weight' | 'notes'>;
     showCount?: boolean;
     onClick?: () => void;
 };

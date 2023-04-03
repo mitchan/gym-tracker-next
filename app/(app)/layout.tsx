@@ -10,15 +10,15 @@ async function getUser() {
     return getUserFromCookie(cookies());
 }
 
-const baseClasses = 'w-full h-full bg-purple-900 text-white';
+const baseClasses = 'w-full h-full text-white';
 
 export default async function AuthRootLayout({ children }: { children: ReactNode }) {
     const user = await getUser();
 
     return (
-        <html lang="en">
+        <html lang="en" className="h-full">
             <head />
-            <body className="h-screen w-screen">
+            <body className="bg-purple-900">
                 {user ? (
                     <div className={`${baseClasses} p-5`}>{children}</div>
                 ) : (

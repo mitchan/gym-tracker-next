@@ -27,6 +27,17 @@ async function getData(id: string) {
                 },
             },
         },
+        select: {
+            id: true,
+            name: true,
+            notes: true,
+            serie: true,
+            recovery: true,
+            weight: true,
+        },
+        orderBy: {
+            name: 'asc',
+        },
     });
 
     return { exercises };
@@ -47,3 +58,7 @@ export default async function Training(props: ExerciseProps) {
         </>
     );
 }
+
+export const metadata = {
+    title: 'GymTracker - Aggiungi esercizio',
+};
