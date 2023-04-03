@@ -48,7 +48,7 @@ async function handleAdd(req: NextApiRequest, res: NextApiResponse) {
         // check if exercise exists
         const exercise = await db.exercise.findFirst({
             where: {
-                id: body.trainingId,
+                id: body.exerciseId,
                 userId: user.id,
             },
         });
